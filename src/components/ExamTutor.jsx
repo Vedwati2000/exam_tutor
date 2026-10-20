@@ -9,7 +9,7 @@ const ExamTutor = () => {
   const [paper, setPaper] = useState(null);
   const [error, setError] = useState('');
 
-  // ✅ Vite requires VITE_ prefix
+
   const GROQ_API_KEY = import.meta.env.VITE_GROQ_API_KEY;
 
   const buildPrompt = (userTopic) => {
@@ -37,21 +37,21 @@ Return ONLY a valid JSON object in this exact format. Do not include any markdow
 }
 
 Rules:
-- Section A must have exactly 10 items.
-- Section B must have exactly 10 items.
+- Section A must have exactly 10 items, and each "answer" field must be contained as short answer.
+- Section B must have exactly 10 items, and each "answer" field must contain a brief answer.
 - Section C must have exactly 10 items, and each "answer" field must contain a comprehensive answer.
-- For Section A and B, "answer" can be an empty string.
-- Start your response with { and end with }. No other characters.`;
+- For Section A and B, "answer" should not be an empty string.
+- Start your response with { and end with }. No other characters.
+- Also provide a input box for the user to enter their topic, and a button to generate the exam paper. The button should be disabled while loading, and show a loading indicator when generating. also in the answer don't includes any asterisk symbols.`;
+
   };
 
-  // Helper: strip markdown fences and extract the JSON object
   const cleanJsonResponse = (raw) => {
     let text = (raw || '').trim();
 
-    // Remove ```json ... ``` or ``` ... ```
+
     text = text.replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
 
-    // Extract from first { to last }
     const start = text.indexOf('{');
     const end = text.lastIndexOf('}');
     if (start === -1 || end === -1 || end <= start) {
@@ -175,7 +175,7 @@ Rules:
             id="topicInput"
             className="form-control form-control-lg"
             rows="3"
-            placeholder="e.g. Class 10 Science — Light: Reflection and Refraction, or 'Data Structures: Arrays and Linked Lists'"
+            placeholder="Enter topic or subject here...."
             value={topic}
             onChange={(e) => setTopic(e.target.value)}
             disabled={loading}
