@@ -1,0 +1,48 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f4f7fb;
+}
+
+.app-background {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #eef4ff 0%, #f8f9fc 100%);
+}
+
+.feedback-form-card {
+  border: none;
+  border-radius: 16px;
+}
+
+.feedback-card {
+  border: none;
+  border-radius: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.feedback-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08) !important;
+}
+
+.form-control,
+.form-select {
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.form-control:focus,
+.form-select:focus {
+  box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.15);
+}
+
+.feedback-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  color: #5f6875;
+}
+
+.card h6 {
+  margin-top: 16px;
+  font-weight: 600;
+}

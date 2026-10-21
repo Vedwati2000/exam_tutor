@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import "./FeedbackForm.css"
+const API_URL = "https://exam-tutorbackend.onrender.com/api/feedback";
 const initialForm = {
     studentName: "",
     batch: "",
@@ -16,12 +18,13 @@ function FeedbackForm() {
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
+
     const fetchFeedback = async () => {
         setLoading(true);
         setError("");
 
         try {
-            const response = await fetch(`https://exam-tutorbackend.onrender.com/api/feedback/submit`);
+            const response = await fetch(API_URL);
             const data = await response.json();
 
             if (!response.ok) {
@@ -89,6 +92,8 @@ function FeedbackForm() {
             setError(err.message);
         }
     };
+
+
 
     const handleEdit = (feedback) => {
         setForm({
