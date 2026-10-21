@@ -1,0 +1,464 @@
+.mascot-container {
+  position: fixed;
+  right: 24px;
+  bottom: 20px;
+  z-index: 1000;
+  width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.mascot-character {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 120px;
+}
+
+.mascot-svg {
+  overflow: visible;
+  position: relative;
+  z-index: 2;
+  transform-origin: center bottom;
+  filter: drop-shadow(0 8px 10px rgba(68, 49, 150, 0.18));
+  animation: mascot-float 3s ease-in-out infinite;
+  transition: filter 0.3s ease;
+}
+
+.mascot-container:hover .mascot-svg {
+  filter: drop-shadow(0 12px 14px rgba(68, 49, 150, 0.3));
+}
+
+
+
+.mascot-idle .mascot-head {
+  transform-origin: 50px 50px;
+  animation: mascot-look-around 5s ease-in-out infinite;
+}
+
+.mascot-idle .mascot-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mascot-blink 4s infinite;
+}
+
+.mascot-idle .mascot-wing {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mascot-wing-rest 2.5s ease-in-out infinite;
+}
+
+/* Thinking animation while the exam is generating */
+
+.mascot-thinking .mascot-svg {
+  animation: mascot-think-bounce 0.8s ease-in-out infinite;
+}
+
+.mascot-thinking .mascot-head {
+  transform-origin: 50px 50px;
+  animation: mascot-think-head 1.4s ease-in-out infinite;
+}
+
+.mascot-thinking .mascot-wing {
+  transform-box: fill-box;
+  transform-origin: center top;
+}
+
+.mascot-thinking .mascot-wing-left {
+  animation: mascot-wing-think-left 0.55s ease-in-out infinite alternate;
+}
+
+.mascot-thinking .mascot-wing-right {
+  animation: mascot-wing-think-right 0.55s ease-in-out infinite alternate;
+}
+
+.mascot-thinking .mascot-eyes {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mascot-blink 2s infinite;
+}
+
+/* Thinking dots */
+
+.mascot-thinking-indicator {
+  position: absolute;
+  top: -2px;
+  right: 3px;
+  display: flex;
+  gap: 4px;
+  z-index: 4;
+  padding: 8px 10px;
+  border-radius: 20px;
+  background: white;
+  box-shadow: 0 4px 14px rgba(35, 29, 80, 0.12);
+}
+
+.mascot-thinking-indicator span {
+  width: 6px;
+  height: 6px;
+  background: #7658e8;
+  border-radius: 50%;
+  animation: thinking-dot 0.7s infinite alternate;
+}
+
+.mascot-thinking-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.mascot-thinking-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* Success animation */
+
+.mascot-success .mascot-svg {
+  animation: mascot-celebrate 0.7s ease-in-out 3;
+}
+
+.mascot-success .mascot-wing-left {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mascot-celebrate-left 0.4s ease-in-out 4 alternate;
+}
+
+.mascot-success .mascot-wing-right {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mascot-celebrate-right 0.4s ease-in-out 4 alternate;
+}
+
+.mascot-success-sparkles {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.mascot-success-sparkles span {
+  position: absolute;
+  color: #f4b942;
+  font-size: 20px;
+  animation: mascot-sparkle 1s ease-in-out infinite alternate;
+}
+
+.mascot-success-sparkles span:nth-child(1) {
+  top: 10px;
+  left: 2px;
+}
+
+.mascot-success-sparkles span:nth-child(2) {
+  top: 25px;
+  right: -2px;
+  animation-delay: 0.3s;
+}
+
+.mascot-success-sparkles span:nth-child(3) {
+  top: 55px;
+  left: -4px;
+  animation-delay: 0.6s;
+}
+
+
+
+.mascot-speech {
+  position: relative;
+  width: 220px;
+  margin-bottom: 8px;
+  padding: 14px 15px;
+  border: 1px solid #e9e5ff;
+  border-radius: 17px;
+  background: #ffffff;
+  color: #292747;
+  box-shadow: 0 10px 35px rgba(43, 34, 100, 0.14);
+  animation: mascot-speech-appear 0.3s ease-out;
+}
+
+.mascot-speech::after {
+  content: "";
+  position: absolute;
+  bottom: -8px;
+  right: 65px;
+  width: 15px;
+  height: 15px;
+  background: white;
+  border-right: 1px solid #e9e5ff;
+  border-bottom: 1px solid #e9e5ff;
+  transform: rotate(45deg);
+}
+
+.mascot-speech-heading {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 7px;
+  font-size: 13px;
+  color: #6848d8;
+}
+
+.mascot-speech-icon {
+  font-size: 17px;
+}
+
+.thinking-dots {
+  letter-spacing: 2px;
+  animation: thinking-text 0.8s infinite alternate;
+}
+
+.mascot-speech-message {
+  font-size: 12px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+
+
+.mascot-caption {
+  margin-top: 2px;
+  padding: 5px 12px;
+  border: 1px solid #eee9ff;
+  border-radius: 20px;
+  background: white;
+  color: #6554b8;
+  box-shadow: 0 3px 12px rgba(43, 34, 100, 0.08);
+  font-size: 11px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mascot-thinking .mascot-caption {
+  color: #d97706;
+}
+
+.mascot-success .mascot-caption {
+  color: #16845b;
+}
+
+
+@keyframes mascot-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes mascot-look-around {
+  0%,
+  40%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  45% {
+    transform: rotate(-5deg);
+  }
+
+  55% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes mascot-blink {
+  0%,
+  44%,
+  48%,
+  100% {
+    transform: scaleY(1);
+  }
+
+  46% {
+    transform: scaleY(0.1);
+  }
+}
+
+@keyframes mascot-wing-rest {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-5deg);
+  }
+}
+
+@keyframes mascot-think-bounce {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-9px) rotate(-2deg);
+  }
+}
+
+@keyframes mascot-think-head {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(-8deg);
+  }
+}
+
+@keyframes mascot-wing-think-left {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(35deg);
+  }
+}
+
+@keyframes mascot-wing-think-right {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-35deg);
+  }
+}
+
+@keyframes thinking-dot {
+  from {
+    opacity: 0.35;
+    transform: translateY(2px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes thinking-text {
+  from {
+    opacity: 0.5;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes mascot-celebrate {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  25% {
+    transform: translateY(-14px) rotate(-5deg);
+  }
+
+  50% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  75% {
+    transform: translateY(-8px) rotate(5deg);
+  }
+}
+
+@keyframes mascot-celebrate-left {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(45deg);
+  }
+}
+
+@keyframes mascot-celebrate-right {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(-45deg);
+  }
+}
+
+@keyframes mascot-sparkle {
+  from {
+    opacity: 0.3;
+    transform: scale(0.6) rotate(0deg);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1.2) rotate(30deg);
+  }
+}
+
+@keyframes mascot-speech-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+
+@media (max-width: 576px) {
+  .mascot-container {
+    right: 10px;
+    bottom: 12px;
+    width: 115px;
+  }
+
+  .mascot-character {
+    width: 95px;
+    height: 100px;
+  }
+
+  .mascot-svg {
+    width: 90px;
+    height: 90px;
+  }
+
+  .mascot-speech {
+    width: 190px;
+    padding: 11px 12px;
+  }
+
+  .mascot-speech-message {
+    font-size: 11px;
+  }
+
+  .mascot-caption {
+    font-size: 10px;
+  }
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot-svg,
+  .mascot-head,
+  .mascot-eyes,
+  .mascot-wing,
+  .mascot-thinking-indicator span,
+  .mascot-success-sparkles span {
+    animation: none !important;
+  }
+}

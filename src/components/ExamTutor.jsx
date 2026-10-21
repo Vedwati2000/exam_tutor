@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import QuestionPaper from './QuestionPaper';
 import Mascot from './Mascot';
 import BouncingBall from './BouncingBall';
+import './ExamTutor.css';
 
 const ExamTutor = () => {
   const [topic, setTopic] = useState('');
@@ -153,95 +154,231 @@ Rules:
     setLoading(false);
   };
 
-  return (
-    <div className="container py-4">
-      <div className="main-card p-4 p-md-5 mx-auto" style={{ maxWidth: '900px' }}>
-        <div className="text-center mb-4">
-          <div className="d-flex justify-content-center align-items-center gap-3 mb-2">
-            <BouncingBall color="#764ba2" />
-            <h1 className="header-title mb-0">AI Exam Preparation Tutor</h1>
-            <BouncingBall color="#667eea" />
-          </div>
-          <p className="header-subtitle">
-            Generate a full exam paper (Sections A, B, C) on any topic with answers.
-          </p>
-        </div>
 
-        <div className="mb-3">
-          <label htmlFor="topicInput" className="form-label fw-semibold">
-            Enter your curriculum topic or subject
-          </label>
-          <textarea
-            id="topicInput"
-            className="form-control form-control-lg"
-            rows="3"
-            placeholder="Enter topic or subject here...."
-            value={topic}
-            onChange={(e) => setTopic(e.target.value)}
-            disabled={loading}
-          />
-        </div>
+    return (
+    <div className="exam-tutor-page">
+        <div className="exam-tutor-card">
+            <div className="exam-tutor-header">
+                <div className="exam-tutor-badge">
+                    <span className="exam-status-dot"></span>
+                    YOUR PERSONAL AI STUDY PARTNER
+                </div>
 
-        {error && (
-          <div className="alert alert-danger fade-in" role="alert">
-            {error}
-          </div>
-        )}
+                <div className="exam-tutor-title">
+                    <BouncingBall color="#6554e8" />
 
-        <div className="d-grid mb-4">
-          <button
-            className={`btn btn-primary btn-lg fw-semibold ${
-              !loading ? 'pulse-btn' : ''
-            }`}
-            onClick={generateExam}
-            disabled={loading}
-          >
-            {loading ? (
-              <>
-                <span className="loader me-2"></span>
-                Generating Exam Paper...
-              </>
-            ) : (
-              <>Generate Exam Paper</>
+                    <h1>
+                        AI Exam <span>Preparation Tutor</span>
+                    </h1>
+
+                    <BouncingBall color="#a092ff" />
+                </div>
+
+                <p className="exam-tutor-subtitle">
+                    Turn your curriculum into a complete exam paper.
+                    Practice smarter, understand concepts, and prepare with confidence.
+                </p>
+            </div>
+
+            <div className="exam-generator-panel">
+                <div className="exam-panel-heading">
+                    <div className="exam-panel-icon">✦</div>
+
+                    <div>
+                        <h3>Create Your Exam Paper</h3>
+                        <p>Start by entering a subject or curriculum topic.</p>
+                    </div>
+                </div>
+
+                <div className="exam-topic-field">
+                    <label htmlFor="topicInput">
+                        Curriculum Topic or Subject
+                        <span className="required-mark"> *</span>
+                    </label>
+
+                    <textarea
+                        id="topicInput"
+                        className="form-control exam-topic-input"
+                        rows="4"
+                        placeholder="For example: Data Structures, Operating Systems, JavaScript..."
+                        value={topic}
+                        onChange={(e) => setTopic(e.target.value)}
+                        disabled={loading}
+                        required
+                    />
+
+                    <div className="exam-input-hint">
+                        <span>✎</span>
+                        Be specific about your topic for more relevant practice questions.
+                    </div>
+                </div>
+
+                {error && (
+                    <div className="alert alert-danger exam-error" role="alert">
+                        <strong>Unable to generate exam.</strong>
+                        <br />
+                        {error}
+                    </div>
+                )}
+
+                <button
+                    type="button"
+                    className="exam-generate-button"
+                    onClick={generateExam}
+                    disabled={loading || !topic.trim()}
+                >
+                    {loading ? (
+                        <>
+                            <span className="exam-loader"></span>
+                            Generating Your Exam...
+                        </>
+                    ) : (
+                        <>
+                            <span className="generate-icon">✦</span>
+                            Generate Exam Paper
+                            <span className="generate-arrow">→</span>
+                        </>
+                    )}
+                </button>
+
+                <p className="exam-button-note">
+                    Your practice paper includes three sections with answers.
+                </p>
+            </div>
+
+            {!paper && !loading && (
+                <div className="exam-structure">
+                    <div className="exam-structure-heading">
+                        <span className="exam-section-eyebrow">
+                            EXAM STRUCTURE
+                        </span>
+
+                        <h3>What's Included?</h3>
+
+                        <p>
+                            Your practice paper follows this three-section format.
+                        </p>
+                    </div>
+
+                    <div className="row g-3">
+                        <div className="col-md-4">
+                            <div className="exam-section-card section-a">
+                                <div className="exam-section-top">
+                                    <div className="exam-section-letter">A</div>
+                                    <span className="exam-section-tag">
+                                        QUICK RECALL
+                                    </span>
+                                </div>
+
+                                <h4>Section A</h4>
+
+                                <p>Short-answer questions to test your basics.</p>
+
+                                <div className="exam-section-divider"></div>
+
+                                <div className="exam-section-stats">
+                                    <div>
+                                        <strong>10</strong>
+                                        <span>Questions</span>
+                                    </div>
+
+                                    <div>
+                                        <strong>1</strong>
+                                        <span>Mark each</span>
+                                    </div>
+                                </div>
+
+                                <div className="exam-total-marks">
+                                    Total: 10 marks
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4">
+                            <div className="exam-section-card section-b">
+                                <div className="exam-section-top">
+                                    <div className="exam-section-letter">B</div>
+                                    <span className="exam-section-tag">
+                                        UNDERSTANDING
+                                    </span>
+                                </div>
+
+                                <h4>Section B</h4>
+
+                                <p>Questions to develop conceptual understanding.</p>
+
+                                <div className="exam-section-divider"></div>
+
+                                <div className="exam-section-stats">
+                                    <div>
+                                        <strong>10</strong>
+                                        <span>Questions</span>
+                                    </div>
+
+                                    <div>
+                                        <strong>3</strong>
+                                        <span>Marks each</span>
+                                    </div>
+                                </div>
+
+                                <div className="exam-total-marks">
+                                    Total: 30 marks
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="col-md-4">
+                            <div className="exam-section-card section-c">
+                                <div className="exam-section-top">
+                                    <div className="exam-section-letter">C</div>
+                                    <span className="exam-section-tag">
+                                        DEEP THINKING
+                                    </span>
+                                </div>
+
+                                <h4>Section C</h4>
+
+                                <p>Detailed questions for deeper learning.</p>
+
+                                <div className="exam-section-divider"></div>
+
+                                <div className="exam-section-stats">
+                                    <div>
+                                        <strong>10</strong>
+                                        <span>Questions</span>
+                                    </div>
+
+                                    <div>
+                                        <strong>5</strong>
+                                        <span>Marks each</span>
+                                    </div>
+                                </div>
+
+                                <div className="exam-total-marks">
+                                    Total: 50 marks
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="exam-structure-footer">
+                        <span>✓</span>
+                        <p>
+                            <strong>Complete practice paper:</strong> 30 questions,
+                            90 total marks, with answers.
+                        </p>
+                    </div>
+                </div>
             )}
-          </button>
+
+            <div className="exam-paper-output">
+                <QuestionPaper data={paper} />
+            </div>
         </div>
 
-        {!paper && !loading && (
-          <div className="row g-3 mb-3">
-            <div className="col-md-4">
-              <div className="card section-a border-0 h-100">
-                <div className="card-body">
-                  <h6 className="fw-bold text-success">Section A</h6>
-                  <p className="small mb-0">10 questions × 1 mark</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card section-b border-0 h-100">
-                <div className="card-body">
-                  <h6 className="fw-bold text-warning">Section B</h6>
-                  <p className="small mb-0">10 questions × 3 marks</p>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-4">
-              <div className="card section-c border-0 h-100">
-                <div className="card-body">
-                  <h6 className="fw-bold text-danger">Section C</h6>
-                  <p className="small mb-0">10 questions × 5 marks (with answers)</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-
-        <QuestionPaper data={paper} />
-      </div>
-
-      <Mascot />
+        <Mascot loading={loading} paper={paper} />
     </div>
-  );
+);
 };
 
 export default ExamTutor;
